@@ -27,8 +27,6 @@ array(
     ),
 ),
 ```
-`ajaxConfirm`
-    String - Msg to confirm javascript or starting with "js:" make a javascript personalized
+`ajaxConfirm` => String - Msg to confirm javascript or starting with `js:` make a javascript personalized
 
-`ajaxClick`
-    Boolean - True => Enable / False => Normal
+`ajaxClick` => Boolean - True => Enable / False => Normal
