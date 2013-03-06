@@ -6,6 +6,7 @@
  * @author Tonin de Rosso Bolzan <admin@tonybolzan.com>
  * @copyright 2013, tonybolzan.com
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ * 
  * @version 1.1
  */
 Yii::import('zii.widgets.grid.CButtonColumn');
