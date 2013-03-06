@@ -47,8 +47,8 @@ array(
             <td>`ajaxConfirm`</td>
             <td>String</td>
             <td>
-                The confirmation message to be displayed when button is clicked.
-                If not set or false, no confirmation message will be displayed.
+                The confirmation message to be displayed when button is clicked.<br>
+                If not set or false, no confirmation message will be displayed.<br>
                 If starting with `js:` make a javascript personalized (`this` refers to `<a>` tag).
             </td>
         </tr>
@@ -56,7 +56,7 @@ array(
             <td>`ajaxData`</td>
             <td>Array</td>
             <td>
-                Aditional Data to send in POST request header (@see CJavaScript::encode())
+                Aditional Data to send in POST request header (@see CJavaScript::encode())<br>
                 (`this` refers to `<a>` tag).
             </td>
         </tr>
