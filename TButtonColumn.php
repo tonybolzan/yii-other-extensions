@@ -7,7 +7,7 @@
  * @copyright 2013, tonybolzan.com
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  * 
- * @version 1.1
+ * @version 1.2
  */
 Yii::import('zii.widgets.grid.CButtonColumn');
 
@@ -97,7 +97,9 @@ class TButtonColumn extends CButtonColumn {
         
         $this->buttons[$button_id]['click'] = <<<JS
 function() {
+    if(this.classList.contains('disabled') || this.disabled) return false;
     $confirmation
+    var th=this;
     $.fn.yiiGridView.update('{$this->grid->id}', {
         type: 'POST',
         url: $(this).attr('href'),$jsData
