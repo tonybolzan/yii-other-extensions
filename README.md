@@ -20,6 +20,7 @@ array(
                 'title' => 'Test',
                 'ajaxClick' => true,        // NEW
                 'ajaxConfirm' => 'Testing', // NEW
+                'ajaxSuccess' => 'js: $.fn.yiiGridView.update("other-grid");', // NEW
                 'ajaxData' => array(        // NEW
                     'test1Post' => 'dataPostTest', // Raw data
                     'test2Post' => 'js: $(th).data("test")', // JS function to get data
@@ -50,6 +51,14 @@ array(
                 The confirmation message to be displayed when button is clicked.<br>
                 If not set or false, no confirmation message will be displayed.<br>
                 If starting with `js:` make a javascript personalized (`this` refers to `<a>` tag).
+            </td>
+        </tr>
+        <tr>
+            <td>`ajaxSuccess`</td>
+            <td>String</td>
+            <td>
+                Must start with `js:` to make a custom javascript.<br>
+                `th` refers `this` of the <a> tag.
             </td>
         </tr>
         <tr>

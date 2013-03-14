@@ -28,6 +28,7 @@ Yii::import('zii.widgets.grid.CButtonColumn');
  *                 'title' => 'Test',
  *                 'ajaxClick' => true,        // NEW v1.0
  *                 'ajaxConfirm' => 'Testing', // NEW v1.0
+ *                 'ajaxSuccess' => 'js: $.fn.yiiGridView.update("other-grid");', // NEW v1.2
  *                 'ajaxData' => array(        // NEW v1.1
  *                     'test1Post' => 'dataPostTest', // Raw data
  *                     'test2Post' => 'js: $(th).data("test")', // JS function to get data
@@ -48,6 +49,11 @@ Yii::import('zii.widgets.grid.CButtonColumn');
  *      If starting with `js:` make a javascript personalized
  *      `this` refers to <a> tag
  * 
+ * ajaxSuccess
+ *  String
+ *      Must start with `js:` to make a custom javascript
+ *      `th` refers `this` of the <a> tag
+ * 
  * ajaxData
  *  Array
  *      Aditional Data to send in POST request header @see CJavaScript::encode()
@@ -64,25 +70,33 @@ class TButtonColumn extends CButtonColumn {
         foreach ($this->buttons as $id => &$button) {
             if (isset($button['options']['ajaxClick']) and $button['options']['ajaxClick']) {
                 
-                $confirmation = isset($button['options']['ajaxConfirm']) ? $button['options']['ajaxConfirm'] : false;
                 $data = (isset($button['options']['ajaxData']) and is_array($button['options']['ajaxData'])) ? $button['options']['ajaxData'] : array();
+                $confirmation = isset($button['options']['ajaxConfirm']) ? $button['options']['ajaxConfirm'] : false;
+                $success = isset($button['options']['ajaxSuccess']) ? $button['options']['ajaxSuccess'] : false;
                 
                 unset($button['options']['ajaxClick']);
-                unset($button['options']['ajaxConfirm']);
                 unset($button['options']['ajaxData']);
+                unset($button['options']['ajaxConfirm']);
+                unset($button['options']['ajaxSuccess']);
                 
-                $this->initAjaxClickButtons($id, $data, $confirmation);
+                $this->initAjaxClickButtons($id, $data, $confirmation, $success);
             }
         }
 
         parent::init();
     }
 
-    protected function initAjaxClickButtons($button_id, $data = array(), $confirmation = false) {
+    protected function initAjaxClickButtons($button_id, $data = array(), $confirmation = false, $success = false) {
         if (is_string($confirmation)) {
-            $confirmation = "if(!confirm(" . CJavaScript::encode($confirmation) . ")) return false;";
+            $jsConfirmation = "if(!confirm(" . CJavaScript::encode($confirmation) . ")) return false;";
         } else {
-            $confirmation = '';
+            $jsConfirmation = '';
+        }
+        
+        if (is_string($success)) {
+            $jsSuccess = CJavaScript::encode($success) . ";";
+        } else {
+            $jsSuccess = '';
         }
 
         if (Yii::app()->request->enableCsrfValidation) {
@@ -98,13 +112,14 @@ class TButtonColumn extends CButtonColumn {
         $this->buttons[$button_id]['click'] = <<<JS
 function() {
     if(this.classList.contains('disabled') || this.disabled) return false;
-    $confirmation
+    $jsConfirmation
     var th=this;
     $.fn.yiiGridView.update('{$this->grid->id}', {
         type: 'POST',
         url: $(this).attr('href'),$jsData
         success: function(data) {
             $.fn.yiiGridView.update('{$this->grid->id}');
+            $jsSuccess
         }
     });
     return false;
