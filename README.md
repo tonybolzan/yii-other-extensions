@@ -1,5 +1,20 @@
 # Yii Other Extensions
 
+## WhoisAction
+Action to verify whois based in domain name passed by `$_GET['url']`
+
+### Usage
+```php
+class TestController extends CController
+{
+    public function actions() {
+        return array(
+            'edit' => 'ext.WhoisAction',
+        );
+    }
+}
+```
+
 ## TWebLogRoute
 Alternative for CWebLogRoute with button to show the log
 

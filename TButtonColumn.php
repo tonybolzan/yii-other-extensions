@@ -4,9 +4,10 @@
  * TButtonColumn class file.
  *
  * @author Tonin de Rosso Bolzan <admin@tonybolzan.com>
- * @copyright 2013, tonybolzan.com
+ * @copyright 2013, Odig Marketing Digital <odig.net>
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  * 
+ * @see http://github.com/tonybolzan/yii-other-extensions GitHub
  * @version 1.2
  */
 Yii::import('zii.widgets.grid.CButtonColumn');

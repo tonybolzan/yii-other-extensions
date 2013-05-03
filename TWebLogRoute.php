@@ -1,13 +1,16 @@
 <?php
 
 /**
- * TWebLogRoute
+ * TWebLogRoute class file.
  * 
  * Need jQuery and Toastr
+ *
+ * @author Tonin de Rosso Bolzan <admin@tonybolzan.com>
+ * @copyright 2013, Odig Marketing Digital <odig.net>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
  * 
- * @author Tonin De Rosso Bolzan <admin@tonybolzan.com>
- * @copyright 2012, Odig Marketing Digital <odig.net>
- * @version 0.2
+ * @see http://github.com/tonybolzan/yii-other-extensions GitHub
+ * @version 1.0
  */
 
 class TWebLogRoute extends CWebLogRoute {
